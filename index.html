@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+</head>
+<body>
+    <p id="status">Lobotomizing...</p>
+    <p id="destination"></p>
+    <script>
+        const status = document.getElementById("status");
+        const destination = document.getElementById("destination");
+        setTimeout(() => {
+            let link = new URL(window.location).searchParams.get("link");
+
+            if (link === null) {
+                status.innerText = "No link provided.";
+                return;
+            }
+
+            let linkVerify = null;
+            try {
+                linkVerify = new URL(link);
+            } catch {
+                try {
+                    link = "https://" + link;
+                    linkVerify = new URL(link);
+                } catch {
+                    status.innerText = "The destination link is not valid.";
+                    return;
+                }
+            }
+
+            if (linkVerify.protocol !== "https:") {
+                status.innerText = "The destination link is not valid, maybe it's not a https link?";
+                return;
+            }
+            destination.innerText = `Moving to ${linkVerify.href}`;
+
+            const userAgent = navigator.userAgent;
+            if (/iPhone|iPad|iPod/.test(userAgent)) {
+                window.location.href = `x-web-search://?${link}`;
+            } else if (/Android/.test(userAgent)) {
+                window.location.href = `intent:${link}#Intent;end`;
+            } else {
+                window.open(link, '_blank');
+            }
+        }, 1000);
+    </script>
+</body>
+
+</html>
