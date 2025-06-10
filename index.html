@@ -26,13 +26,13 @@
                     link = "https://" + link;
                     linkVerify = new URL(link);
                 } catch {
-                    status.innerText = "The destination link is not valid.";
+                    status.innerText = "The destination link is invalid.";
                     return;
                 }
             }
 
             if (linkVerify.protocol !== "https:") {
-                status.innerText = "The destination link is not valid, maybe it's not a https link?";
+                status.innerText = "The destination link is invalid, maybe it's not a https link?";
                 return;
             }
             status.innerText = `Moving to ${linkVerify.href}`;
