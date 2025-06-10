@@ -15,3 +15,5 @@ https://neursh.github.io/instabio?link=x.com
 ```
 
 Put that anywhere in ur bio, especially Meta apps, it will force the WebView to open a default app, most likely the browser that you use.
+
+Only supports https, who would use http in the big 2025?
